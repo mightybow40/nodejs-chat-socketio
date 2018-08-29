@@ -1,0 +1,19 @@
+<script>
+
+   $(document).ready(function(){
+       $('#exit').click(function(){
+
+           $.ajax({
+               method: "POST",
+               url: '/logout',
+               contentType: 'application/json',
+               success: function(){
+                   window.location.href = '/';
+               }
+           });
+
+       });
+       return false;
+   });
+
+</script>

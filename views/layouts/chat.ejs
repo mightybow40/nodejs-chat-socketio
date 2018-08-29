@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= blocks.title  %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/vendor/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="/vendor/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <%-partial('../partials/topNav')%>
+    <%-body%>
+
+<h1>Chat</h1>
+
+    <div class="chat" style="border: solid 1px black; overflow: scroll; width: 1000px; height: 200px ">
+        <dl class="messages">
+
+        </dl>
+
+
+
+    </div>
+    <form>
+        <input type="text" id="valueMessage">
+        <button id="send">Send</button>
+    </form>
+</div>
+<script src="/vendor/bower_components/socket.io-client/dist/socket.io.js"></script>
+<script>
+
+
+</script>
+<script>
+    var socket = io({
+        autoConnect: true
+    });
+$('#send').click(function(){
+    var message = $('#valueMessage').val();
+if(!message){
+    return false;
+}
+    $.ajax({
+        method: 'POST',
+        url: '/send',
+        contentType: 'application.json',
+        success: function(data){
+
+    socket.emit('message', message, function(datas){
+        $('.messages').append('<dd>'+'<strong>' +"Me" +'</strong>' +": " +message +'</dd>\n');
+
+    });
+
+    $('#valueMessage').val('');
+
+
+    }
+    });
+    return false;
+});
+    socket.on('dis', function(data){
+        $('.messages').append('<dd>'+name+" " +data +'</dd>\n');
+    });
+    socket.on('disconnect', function(){
+        $('.messages').append('<dd>'+ "Соединение потеряно" +'</dd>\n');
+
+    });
+    socket.on('connect', function(socket){
+        $('.messages').append('<dd>'+ "Соединение восстановленно" +'</dd>\n');
+
+    });
+
+
+    socket.on('con', function(data){
+
+        $('.messages').append('<dd>' +data +'</dd>\n');
+    });
+    socket.on('send', function(dataT){
+        $('.messages').append('<dd>'+'<strong>' +dataT.name +'</strong>' +": " +dataT.msg +'</dd>\n');
+
+    });
+</script>
+</body>
+</html>

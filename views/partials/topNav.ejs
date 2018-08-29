@@ -1,0 +1,42 @@
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="/chat">Chat</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user">Account</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login">Log in</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="/Singin" class="nav-link">Registration</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="#" id="exit" class="nav-link">Exit</a>
+    </li>
+</ul>
+
+<script>
+
+    $(document).ready(function(){
+        $('#exit').click(function(){
+
+            $.ajax({
+                method: "POST",
+                url: '/logout',
+                contentType: 'application/json',
+                success: function(){
+                    window.location.href = '/';
+                }
+            });
+
+        });
+    });
+
+</script>

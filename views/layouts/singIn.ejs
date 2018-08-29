@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= blocks.title  %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/vendor/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="/vendor/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <%-partial('../partials/topNav')%>
+    <%-body%>
+
+
+    <%- partial('../partials/equlPass')%>
+    <%- partial('../partials/nameUsing')%>
+    <%- partial('../partials/welcome')%>
+    <%- partial('../partials/emptyField')%>
+    <form class="col-6 my-5 py-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="text" id="login" class="form-control"  placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Password</label>
+                <input type="password" class="form-control" id="repeatPassword" placeholder="Password">
+            </div>
+        </div>
+
+
+        <button type="submit" id="but" class="btn btn-primary">Sign in</button>
+    </form>
+
+</div>
+<script>
+
+
+
+
+
+
+    $('#but').click(function(){
+$('#but').text('Loading');
+$("#but").attr("disabled", true);
+        var login = $('#login').val();
+        var password = $('#password').val();
+        var secondPass = $('#repeatPassword').val();
+if(login == "" || password == "" || secondPass == ""){
+    $('#field').fadeIn().delay(2000).fadeOut();
+    $('#but').text('Sing in');
+    $("#but").attr("disabled", false);
+    return false;
+}
+        if(password == secondPass){
+            $.ajax({
+                url: "/singin",
+                method: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({login: login, password: password, second: secondPass}),
+                complete: function() {
+
+                },
+                statusCode: {
+                    200: function(data){
+                        $('#welcome').fadeIn().delay(2000).fadeOut();
+                        $('#but').text('Sing in');
+                        $("#but").attr("disabled", false);
+
+
+
+                    },
+                    403: function(data){
+
+                        $('#usingName').fadeIn().delay(2000).fadeOut();
+                        $('#but').text('Sing in');
+                        $("#but").attr("disabled", false);
+                    }
+                }
+            });
+            return false;
+        }
+        else{
+            $('#equlsPass').fadeIn().delay(2000).fadeOut();
+            $('#but').text('Sing in');
+            $("#but").attr("disabled", false);
+        }
+        return false;
+    });
+</script>
+</body>
+</html>
