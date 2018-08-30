@@ -1,0 +1,9 @@
+diff a/views/layouts/chat.ejs b/views/layouts/chat.ejs	(rejected hunks)
+@@ -16,6 +16,7 @@
+ 
+ <h1>Chat</h1>
+ 
++    <div class="chat" style="border: solid 1px white; overflow: scroll;  width: 1000px; height: 200px; background-color: whitesmoke;">
+         <dl class="messages">
+ 
+         </dl>
