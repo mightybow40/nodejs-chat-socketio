@@ -16,7 +16,7 @@
 
 <h1>Chat</h1>
 
-    <div class="chat" style="border: solid 1px black; overflow: scroll; width: 1000px; height: 200px ">
+    <div class="chat" style="border: solid 1px white; overflow: scroll;  width: 1000px; height: 200px; background-color: whitesmoke;">
         <dl class="messages">
 
         </dl>
@@ -62,7 +62,7 @@ if(!message){
     return false;
 });
     socket.on('dis', function(data){
-        $('.messages').append('<dd>'+name+" " +data +'</dd>\n');
+        $('.messages').append('<dd>' +data +'</dd>\n');
     });
     socket.on('disconnect', function(){
         $('.messages').append('<dd>'+ "Соединение потеряно" +'</dd>\n');
@@ -79,7 +79,8 @@ if(!message){
         $('.messages').append('<dd>' +data +'</dd>\n');
     });
     socket.on('send', function(dataT){
-        $('.messages').append('<dd>'+'<strong>' +dataT.name +'</strong>' +": " +dataT.msg +'</dd>\n');
+        var a = `<a href="/user/${dataT.name}">${dataT.name}</a>`;
+        $('.messages').append('<dd>'+'<strong>' +a +'</strong>' +": " +dataT.msg +'</dd>\n');
 
     });
 </script>

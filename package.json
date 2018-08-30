@@ -33,5 +33,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mightybow40/chat_with_auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mightybow40/chat_with_auth/issues"
+  },
+  "homepage": "https://github.com/mightybow40/chat_with_auth#readme",
   "description": ""
 }
